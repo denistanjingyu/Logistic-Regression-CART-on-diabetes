@@ -1,11 +1,11 @@
 library (data.table)
 library(ggplot2)
+
 setwd('')
 diabetes.dt<-fread('diabetes.csv')
+
 summary(diabetes.dt)
-
 diabetes.dt$Outcome<-factor(diabetes.dt$Outcome)
-
 summary(diabetes.dt)
 
 (sum(diabetes.dt$Glucose==0))/(nrow(diabetes.dt))
@@ -55,7 +55,7 @@ threshold<-sum(diabetes.dt$Outcome=="1")/length(diabetes.dt$Outcome)
 threshold
 diabetes.hat<-ifelse(prob>threshold, 1, 0)
 
-#TrainTestsplit
+# TrainTestsplit
 library(caTools)
 set.seed(2004)
 
@@ -93,13 +93,13 @@ accuracy = mean(predict.diabetes.test == testset$Outcome, na.rm = T)
 
 # For CART:
 library(rpart)
-library(rpart.plot)			# For Enhanced tree plots via PRP()
+library(rpart.plot)	# For Enhanced tree plots via PRP()
 
-options(digits = 3) #show only 3 decimal places
+options(digits = 3) # show only 3 decimal places
 
 m1_c <- rpart(Outcome ~ . , data = diabetes.dt, method = 'class', cp = 0) 
 
-rpart.plot(m1_c, nn = T, main = "Maximal Tree in m1_c") #nn = T means we want the plot to show the node number
+rpart.plot(m1_c, nn = T, main = "Maximal Tree in m1_c") # nn = T means we want the plot to show the node number
 
 # Results of CART as Decision Rules
 print(m1_c)
@@ -165,9 +165,8 @@ diabetes.m1 <- glm(Outcome ~ ., family = binomial, data = diabetes.dt)
 summary(diabetes.m1)
 
 # For Logistic Regression:
-
 library (data.table)
-setwd('C:/Users/jasly/Documents/NBS Y2S1/Unit 1 to 7 (Analytics 1)/TA2')
+setwd('')
 diabetes.dt<-fread('diabetes.csv')
 summary(diabetes.dt)
 
@@ -248,7 +247,7 @@ options(digits = 3) #show only 3 digits (ie 3 significant digits)
 
 m1_c <- rpart(Outcome ~ . , data = diabetes.dt, method = 'class', cp = 0) 
 
-rpart.plot(m1_c, nn = T, main = "Maximal Tree in m1") #nn = T means we want the plot to show the node number
+rpart.plot(m1_c, nn = T, main = "Maximal Tree in m1") # nn = T means we want the plot to show the node number
 
 # Results of CART as Decision Rules
 print(m1_c)
@@ -262,7 +261,7 @@ plotcp(m1_c)
 cp.min <- m1_c$cptable[which.min(m1_c$cptable[,"xerror"]),"CP"]
 cp.min
 cp.opt1 <- 0.01586  # Simplest tree within 1SE
-#cp.opt2 <- 0.00280  # if cp.opt1 is too simple
+# cp.opt2 <- 0.00280  # if cp.opt1 is too simple
 
 # Prune the max tree m2 using a particular CP value (i.e. a specified penalty cost for model complexity)
 m2_c <- prune(m1_c, cp = cp.opt1)
