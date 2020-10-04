@@ -13,13 +13,13 @@ diabetes.dt$Glucose <- replace(diabetes.dt$Glucose, diabetes.dt$Glucose == 0, NA
 (sum(diabetes.dt$SkinThickness==0))/(nrow(diabetes.dt))
 diabetes.dt$SkinThickness <- replace(diabetes.dt$SkinThickness, diabetes.dt$SkinThickness == 0, NA)
 diabetes.dt$SkinThickness <- replace(diabetes.dt$SkinThickness, diabetes.dt$SkinThickness == 99, NA)
-diabetes.dt$SkinThickness[is.na(diabetes.dt$SkinThickness)]=mean(diabetes.dt$SkinThickness,na.rm=T)
+diabetes.dt$SkinThickness[is.na(diabetes.dt$SkinThickness)] = mean(diabetes.dt$SkinThickness, na.rm = T)
 summary(diabetes.dt$SkinThickness)
 (sum(diabetes.dt$BMI==0))/(nrow(diabetes.dt))
 diabetes.dt$BMI <- replace(diabetes.dt$BMI, diabetes.dt$BMI == 0, NA)
 (sum(diabetes.dt$BloodPressure==0))/(nrow(diabetes.dt))
 diabetes.dt$BloodPressure <- replace(diabetes.dt$BloodPressure, diabetes.dt$BloodPressure == 0, NA)
-diabetes.dt$BloodPressure[is.na(diabetes.dt$BloodPressure)]=mean(diabetes.dt$BloodPressure,na.rm=T)
+diabetes.dt$BloodPressure[is.na(diabetes.dt$BloodPressure)]=mean(diabetes.dt$BloodPressure, na.rm = T)
 summary(diabetes.dt)
 
 (sum(diabetes.dt$Glucose==0))/(nrow(diabetes.dt))
@@ -27,20 +27,20 @@ diabetes.dt$Glucose <- replace(diabetes.dt$Glucose, diabetes.dt$Glucose == 0, NA
 (sum(diabetes.dt$SkinThickness==0))/(nrow(diabetes.dt))
 diabetes.dt$SkinThickness <- replace(diabetes.dt$SkinThickness, diabetes.dt$SkinThickness == 0, NA)
 diabetes.dt$SkinThickness <- replace(diabetes.dt$SkinThickness, diabetes.dt$SkinThickness == 99, NA)
-diabetes.dt$SkinThickness[is.na(diabetes.dt$SkinThickness)]=mean(diabetes.dt$SkinThickness,na.rm=T)
+diabetes.dt$SkinThickness[is.na(diabetes.dt$SkinThickness)] = mean(diabetes.dt$SkinThickness, na.rm = T)
 summary(diabetes.dt$SkinThickness)
 (sum(diabetes.dt$BMI==0))/(nrow(diabetes.dt))
 diabetes.dt$BMI <- replace(diabetes.dt$BMI, diabetes.dt$BMI == 0, NA)
 (sum(diabetes.dt$BloodPressure==0))/(nrow(diabetes.dt))
 diabetes.dt$BloodPressure <- replace(diabetes.dt$BloodPressure, diabetes.dt$BloodPressure == 0, NA)
-diabetes.dt$BloodPressure[is.na(diabetes.dt$BloodPressure)]=mean(diabetes.dt$BloodPressure,na.rm=T)
+diabetes.dt$BloodPressure[is.na(diabetes.dt$BloodPressure)] = mean(diabetes.dt$BloodPressure, na.rm = T)
 summary(diabetes.dt)
 
 diabetes.m1 <- glm(Outcome ~ ., family = binomial, data = diabetes.dt)
 summary(diabetes.m1)
 
 # Remove BloodPressure, SkinThickness, Insulin and Age
-diabetes.m2 <- glm(Outcome ~ .-BloodPressure-SkinThickness -Insulin -Age , family = binomial, data = diabetes.dt)
+diabetes.m2 <- glm(Outcome ~ .-BloodPressure-SkinThickness -Insulin - Age , family = binomial, data = diabetes.dt)
 summary(diabetes.m2)
 
 OR.m2<-exp(coef(diabetes.m2))
@@ -51,9 +51,9 @@ OR.m2<-exp(confint(diabetes.m2))
 OR.m2
 
 prob<-predict(diabetes.m2, type='response')
-threshold<-sum(diabetes.dt$Outcome=="1")/length(diabetes.dt$Outcome)
+threshold <- sum(diabetes.dt$Outcome=="1")/length(diabetes.dt$Outcome)
 threshold
-diabetes.hat<-ifelse(prob>threshold, 1, 0)
+diabetes.hat <- ifelse(prob>threshold, 1, 0)
 
 # TrainTestsplit
 library(caTools)
