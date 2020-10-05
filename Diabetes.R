@@ -15,23 +15,23 @@ diabetes.dt$SkinThickness <- replace(diabetes.dt$SkinThickness, diabetes.dt$Skin
 diabetes.dt$SkinThickness <- replace(diabetes.dt$SkinThickness, diabetes.dt$SkinThickness == 99, NA)
 diabetes.dt$SkinThickness[is.na(diabetes.dt$SkinThickness)] = mean(diabetes.dt$SkinThickness, na.rm = T)
 summary(diabetes.dt$SkinThickness)
-(sum(diabetes.dt$BMI==0))/(nrow(diabetes.dt))
+(sum(diabetes.dt$BMI == 0))/(nrow(diabetes.dt))
 diabetes.dt$BMI <- replace(diabetes.dt$BMI, diabetes.dt$BMI == 0, NA)
-(sum(diabetes.dt$BloodPressure==0))/(nrow(diabetes.dt))
+(sum(diabetes.dt$BloodPressure == 0))/(nrow(diabetes.dt))
 diabetes.dt$BloodPressure <- replace(diabetes.dt$BloodPressure, diabetes.dt$BloodPressure == 0, NA)
 diabetes.dt$BloodPressure[is.na(diabetes.dt$BloodPressure)]=mean(diabetes.dt$BloodPressure, na.rm = T)
 summary(diabetes.dt)
 
-(sum(diabetes.dt$Glucose==0))/(nrow(diabetes.dt))
+(sum(diabetes.dt$Glucose == 0))/(nrow(diabetes.dt))
 diabetes.dt$Glucose <- replace(diabetes.dt$Glucose, diabetes.dt$Glucose == 0, NA)
 (sum(diabetes.dt$SkinThickness==0))/(nrow(diabetes.dt))
 diabetes.dt$SkinThickness <- replace(diabetes.dt$SkinThickness, diabetes.dt$SkinThickness == 0, NA)
 diabetes.dt$SkinThickness <- replace(diabetes.dt$SkinThickness, diabetes.dt$SkinThickness == 99, NA)
 diabetes.dt$SkinThickness[is.na(diabetes.dt$SkinThickness)] = mean(diabetes.dt$SkinThickness, na.rm = T)
 summary(diabetes.dt$SkinThickness)
-(sum(diabetes.dt$BMI==0))/(nrow(diabetes.dt))
+(sum(diabetes.dt$BMI == 0))/(nrow(diabetes.dt))
 diabetes.dt$BMI <- replace(diabetes.dt$BMI, diabetes.dt$BMI == 0, NA)
-(sum(diabetes.dt$BloodPressure==0))/(nrow(diabetes.dt))
+(sum(diabetes.dt$BloodPressure == 0))/(nrow(diabetes.dt))
 diabetes.dt$BloodPressure <- replace(diabetes.dt$BloodPressure, diabetes.dt$BloodPressure == 0, NA)
 diabetes.dt$BloodPressure[is.na(diabetes.dt$BloodPressure)] = mean(diabetes.dt$BloodPressure, na.rm = T)
 summary(diabetes.dt)
@@ -50,8 +50,8 @@ OR.m2
 OR.m2<-exp(confint(diabetes.m2))
 OR.m2
 
-prob<-predict(diabetes.m2, type='response')
-threshold <- sum(diabetes.dt$Outcome=="1")/length(diabetes.dt$Outcome)
+prob<-predict(diabetes.m2, type = 'response')
+threshold <- sum(diabetes.dt$Outcome == "1")/length(diabetes.dt$Outcome)
 threshold
 diabetes.hat <- ifelse(prob>threshold, 1, 0)
 
@@ -71,14 +71,14 @@ diabetes.m3 <- glm(Outcome ~ . , family = binomial, data = trainset)
 summary(diabetes.m3)
 
 # Model 4 with outcome against all except skinthickness, BloodPressure, insulin, age
-diabetes.m4 <- glm(Outcome ~ .-SkinThickness -BloodPressure -Insulin -Age , family = binomial, data = trainset, na.action = na.exclude)
+diabetes.m4 <- glm(Outcome ~ .-SkinThickness - BloodPressure - Insulin - Age , family = binomial, data = trainset, na.action = na.exclude)
 summary(diabetes.m4)
 
-prob.train<-predict(diabetes.m4, type="response")
-predict.diabetes.train<-ifelse(prob.train>threshold,"1","0")
-table3<-table(trainset$Outcome,predict.diabetes.train)
+prob.train <- predict(diabetes.m4, type = "response")
+predict.diabetes.train<-ifelse(prob.train > threshold, "1", "0")
+table3 <- table(trainset$Outcome,predict.diabetes.train)
 table3
-mean(predict.diabetes.train==trainset$Outcome, na.rm = T)
+mean(predict.diabetes.train == trainset$Outcome, na.rm = T)
 
 # Confusion Matrix
 prob.test <- predict(diabetes.m4, newdata = testset, type = 'response')
@@ -89,7 +89,6 @@ prop.table(table4)
 
 # Overall Accuracy For Logistic Model
 accuracy = mean(predict.diabetes.test == testset$Outcome, na.rm = T)
-
 
 # For CART:
 library(rpart)
@@ -144,20 +143,20 @@ library(rpart)
 library(rpart.plot)	# For Enhanced tree plots via PRP()
 set.seed(2004)
 
-setwd("C:\\Users\\ernest\\OneDrive\\Desktop\\Course Outlines\\Y2S1\\BC2406 Analytics I\\Team Challenge Assignment 2")
+setwd("Team Challenge Assignment 2")
 diabetes.dt <- fread ("diabetes.csv")
 
 # For Data cleaning
-(sum(diabetes.dt$Glucose==0))/(nrow(diabetes.dt))
+(sum(diabetes.dt$Glucose == 0))/(nrow(diabetes.dt))
 diabetes.dt$Glucose <- replace(diabetes.dt$Glucose, diabetes.dt$Glucose == 0, NA)
-(sum(diabetes.dt$SkinThickness==0))/(nrow(diabetes.dt))
+(sum(diabetes.dt$SkinThickness == 0))/(nrow(diabetes.dt))
 diabetes.dt$SkinThickness <- replace(diabetes.dt$SkinThickness, diabetes.dt$SkinThickness == 0, NA)
 diabetes.dt$SkinThickness <- replace(diabetes.dt$SkinThickness, diabetes.dt$SkinThickness == 99, NA)
 diabetes.dt$SkinThickness[is.na(diabetes.dt$SkinThickness)]=mean(diabetes.dt$SkinThickness, na.rm = T)
 summary(diabetes.dt$SkinThickness)
-(sum(diabetes.dt$BMI==0))/(nrow(diabetes.dt))
+(sum(diabetes.dt$BMI == 0))/(nrow(diabetes.dt))
 diabetes.dt$BMI <- replace(diabetes.dt$BMI, diabetes.dt$BMI == 0, NA)
-(sum(diabetes.dt$BloodPressure==0))/(nrow(diabetes.dt))
+(sum(diabetes.dt$BloodPressure == 0))/(nrow(diabetes.dt))
 diabetes.dt$BloodPressure <- replace(diabetes.dt$BloodPressure, diabetes.dt$BloodPressure == 0, NA)
 diabetes.dt$BloodPressure[is.na(diabetes.dt$BloodPressure)] = mean(diabetes.dt$BloodPressure, na.rm = T)
 summary(diabetes.dt)
@@ -173,18 +172,18 @@ summary(diabetes.dt)
 diabetes.dt$Outcome<-factor(diabetes.dt$Outcome)
 summary(diabetes.dt)
 
-(sum(diabetes.dt$Glucose==0))/(nrow(diabetes.dt))
+(sum(diabetes.dt$Glucose == 0))/(nrow(diabetes.dt))
 diabetes.dt$Glucose <- replace(diabetes.dt$Glucose, diabetes.dt$Glucose == 0, NA)
 (sum(diabetes.dt$SkinThickness==0))/(nrow(diabetes.dt))
 diabetes.dt$SkinThickness <- replace(diabetes.dt$SkinThickness, diabetes.dt$SkinThickness == 0, NA)
 diabetes.dt$SkinThickness <- replace(diabetes.dt$SkinThickness, diabetes.dt$SkinThickness == 99, NA)
 diabetes.dt$SkinThickness[is.na(diabetes.dt$SkinThickness)]=mean(diabetes.dt$SkinThickness, na.rm = T)
 summary(diabetes.dt$SkinThickness)
-(sum(diabetes.dt$BMI==0))/(nrow(diabetes.dt))
+(sum(diabetes.dt$BMI == 0))/(nrow(diabetes.dt))
 diabetes.dt$BMI <- replace(diabetes.dt$BMI, diabetes.dt$BMI == 0, NA)
-(sum(diabetes.dt$BloodPressure==0))/(nrow(diabetes.dt))
+(sum(diabetes.dt$BloodPressure == 0))/(nrow(diabetes.dt))
 diabetes.dt$BloodPressure <- replace(diabetes.dt$BloodPressure, diabetes.dt$BloodPressure == 0, NA)
-diabetes.dt$BloodPressure[is.na(diabetes.dt$BloodPressure)] = mean(diabetes.dt$BloodPressure,na.rm = T)
+diabetes.dt$BloodPressure[is.na(diabetes.dt$BloodPressure)] = mean(diabetes.dt$BloodPressure, na.rm = T)
 summary(diabetes.dt)
 
 diabetes.m1 <- glm(Outcome ~ ., family = binomial, data = diabetes.dt)
@@ -194,17 +193,17 @@ summary(diabetes.m1)
 diabetes.m2 <- glm(Outcome ~ .-BloodPressure - SkinThickness - Insulin - Age , family = binomial, data = diabetes.dt)
 summary(diabetes.m2)
 
-OR.m2<-exp(coef(diabetes.m2))
+OR.m2 <- exp(coef(diabetes.m2))
 OR.m2
 
 # All don't include 1
-OR.m2<-exp(confint(diabetes.m2))
+OR.m2 <- exp(confint(diabetes.m2))
 OR.m2
 
-prob<-predict(diabetes.m2, type = 'response')
-threshold<-sum(diabetes.dt$Outcome == "1")/length(diabetes.dt$Outcome)
+prob <- predict(diabetes.m2, type = 'response')
+threshold <- sum(diabetes.dt$Outcome == "1")/length(diabetes.dt$Outcome)
 threshold
-diabetes.hat<-ifelse(prob>threshold, 1, 0)
+diabetes.hat <- ifelse(prob>threshold, 1, 0)
 
 # TrainTestsplit
 library(caTools)
@@ -224,11 +223,11 @@ summary(diabetes.m3)
 diabetes.m4 <- glm(Outcome ~ .-SkinThickness - Insulin - Age , family = binomial, data = trainset, na.action = na.exclude)
 summary(diabetes.m4)
 
-prob.train<-predict(diabetes.m4, type = "response")
-predict.diabetes.train<-ifelse(prob.train>threshold, "1", "0")
-table3<-table(trainset$Outcome,predict.diabetes.train)
+prob.train <- predict(diabetes.m4, type = "response")
+predict.diabetes.train<-ifelse(prob.train > threshold, "1", "0")
+table3 <- table(trainset$Outcome,predict.diabetes.train)
 table3
-mean(predict.diabetes.train==trainset$Outcome, na.rm = T)
+mean(predict.diabetes.train == trainset$Outcome, na.rm = T)
 
 # Confusion Matrix
 prob.test <- predict(diabetes.m4, newdata = testset, type = 'response')
@@ -258,7 +257,7 @@ printcp(m1_c, digits = 3)
 # Plot CV error vs cp values
 plotcp(m1_c)
 
-cp.min <- m1_c$cptable[which.min(m1_c$cptable[,"xerror"]),"CP"]
+cp.min <- m1_c$cptable[which.min(m1_c$cptable[, "xerror"]), "CP"]
 cp.min
 cp.opt1 <- 0.01586  # Simplest tree within 1SE
 # cp.opt2 <- 0.00280  # if cp.opt1 is too simple
