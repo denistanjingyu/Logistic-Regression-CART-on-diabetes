@@ -116,7 +116,7 @@ printcp(m2_c, digits = 3)
 rpart.plot(m2_c, nn = T, main = "Minimal Tree in m2_c")
 
 # Find the optimal CART via cp Table
-cp.min <- m1_c$cptable[which.min(m1_c$cptable[,"xerror"]),"CP"]
+cp.min <- m1_c$cptable[which.min(m1_c$cptable[, "xerror"]), "CP"]
 m3_c <- prune(m1_c, cp = cp.min)
 print(m3_c)
 printcp(m3_c, digits = 3)
